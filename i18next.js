@@ -1,11 +1,11 @@
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import { resources } from './src/locales';
+import resources from './src/locales/index.js';
 
 i18next
   .use(initReactI18next)
   .init({
-    lng: sp,
+    lng: 'sp',
     debug: true,
     resources,
     interpolation: {
@@ -13,4 +13,4 @@ i18next
     },
   });
 
-  export default i18next;
+export default i18next;

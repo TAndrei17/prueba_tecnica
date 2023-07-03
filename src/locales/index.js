@@ -1,3 +1,5 @@
 import sp from './sp.js';
 
-export const resources = { sp };
+const resources = { sp };
+
+export default resources;

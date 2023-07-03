@@ -1,14 +1,14 @@
 const sp = {
   translation: {
     pageOne: {
-      header: 'Cien mejores podcasts',
+      header: 'Cien mejores podcastes de Apple/US',
       placeholder: 'Introduzca podcast o autor',
-      button: 'Buscar'
+      button: 'Buscar',
     },
     pageTwo: {
 
     },
-  }
+  },
 };
 
 export default sp;
