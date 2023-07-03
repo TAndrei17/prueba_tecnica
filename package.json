@@ -20,6 +20,7 @@
     "react-i18next": "^13.0.1",
     "react-native": "0.71.8",
     "react-native-web": "~0.18.10",
+    "react-redux": "^8.1.1",
     "rollbar-react-native": "^0.9.3"
   },
   "devDependencies": {
