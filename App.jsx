@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 
 import UpdateState from './src/api/update_state.js';
 import store from './src/slices';
+import StatusProvider from './src/context/status_provider.js';
 
 import PageOne from './src/pages/page_1.jsx';
 
@@ -17,13 +18,15 @@ rollbar.log('Hello, World!');
 
 export default function App() {
   return (
-    <Provider store={store}>
-      <UpdateState>
-        <View style={styles.container}>
-          <PageOne />
-        </View>
-      </UpdateState>
-    </Provider>
+    <StatusProvider>
+      <Provider store={store}>
+        <UpdateState>
+          <View style={styles.container}>
+            <PageOne />
+          </View>
+        </UpdateState>
+      </Provider>
+    </StatusProvider>
   );
 }
 
