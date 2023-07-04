@@ -6,23 +6,14 @@ import { actions as podcastsActions } from '../slices/podcasts_all_slice.js';
 
 const UpdateState = ({ children }) => {
   const dispatch = useDispatch();
+  // count is updating 1 time in 24 hours
+  // useEffects works again when count is changed
   const [count, setCount] = useState(0);
+  setInterval(() => setCount(count + 1), 8.64e+7);
 
   useEffect(() => {
-    // the function produces promise, but useEffect should not produce something;
-    // that reason use 'setPodcasts';
-
-    // a verify should be before 'setPodcasts'
     const setPodcasts = async () => {
       const normalizeData = await getPodcasts();
-
-      // verify time of last loading
-      // if it more than 24 hours update state
-      // 07/04/23 - it will not work! Need to save a moment in context!
-      const currentTime = new Date().getTime();
-      if (currentTime - normalizeData.loadTime >= 8.64e+7) {
-        setCount(count + 1);
-      }
 
       dispatch(podcastsActions.addPodcasts({
         entities: normalizeData.allPodcasts,

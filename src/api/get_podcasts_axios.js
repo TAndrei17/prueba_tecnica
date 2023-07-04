@@ -1,5 +1,6 @@
 import axios from 'axios';
 import linkPodcasts from '../url';
+import { statusState } from '../context/index.js';
 
 const getPodcasts = async () => {
   const normalizeData = {
@@ -14,7 +15,7 @@ const getPodcasts = async () => {
     // console.log(data);
     const { entry } = data.feed;
     // record load time
-    normalizeData.loadTime = new Date().getTime();
+    statusState.podcastsLoadTime = new Date().getTime();
 
     // create object for save to app's state
     // id12345: { id, author, podcast }
