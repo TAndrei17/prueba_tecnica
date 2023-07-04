@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice /* current */ } from '@reduxjs/toolkit';
 
 const initialState = {
   entities: {},
@@ -14,6 +14,8 @@ const podcastsSlice = createSlice({
       const { entities, ids } = payload;
       state.entities = entities;
       state.ids = ids;
+      // eslint-disable-next-line no-console
+      // console.log(current(state));
     },
   },
 });
