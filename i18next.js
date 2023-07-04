@@ -5,6 +5,7 @@ import resources from './src/locales/index.js';
 i18next
   .use(initReactI18next)
   .init({
+    compatibilityJSON: 'v3',
     lng: 'sp',
     debug: true,
     resources,
