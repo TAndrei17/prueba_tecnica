@@ -1,46 +1,69 @@
-import React, { useContext } from 'react';
-import { useSelector } from 'react-redux';
-import { View, StyleSheet, FlatList } from 'react-native';
-// import i18next from '../../../i18next.js';
+import React, { useState, useContext } from 'react';
+import {
+  View, TextInput, Button, StyleSheet,
+} from 'react-native';
 
-import choosePodcasts from '../data_processing/podcasts_choose.js';
-import ListPodcast from './List_Podcast.jsx';
 import StatusContext from '../../context/index.js';
+import i18next from '../../../i18next.js';
+
+import ListPodcasts from './Podcasts_list.jsx';
 
 const styles = StyleSheet.create({
-  body: {
-
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
   },
-  text: {
-
+  input: {
+    width: '75%',
+    padding: 10,
+    borderStyle: 'solid',
+    borderBottomWidth: 2,
+    borderBottomColor: '#BF3030',
   },
 });
 
 const AppBody = () => {
   const { statusState } = useContext(StatusContext);
-  // Get array of objects from state: [ { id, }]
-  const podcasts = useSelector((state) => {
-    const getPodcasts = state.podcastsReducer.ids.map(
-      (id) => state.podcastsReducer.entities[id],
-    );
-    return getPodcasts;
-  });
-  // eslint-disable-next-line no-console
-  // console.log(podcasts);
+  const [text, setText] = useState('');
 
-  const findPodcasts = choosePodcasts(podcasts, 'The');
+  statusState.search = text;
+  if (text.length === 0) {
+    statusState.filterChannels = 'inactive';
+  }
 
-  const codeJSX = (
-    <View style={styles.body}>
-      <FlatList
-        data={statusState.filterChannels === 'inactive' ? podcasts : findPodcasts}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <ListPodcast name={item.author} author={item.podcast} />}
-      />
+  const searchPodcasts = (str) => {
+    statusState.filterChannels = 'active';
+    setText(str);
+  };
+
+  const cleanSearch = () => {
+    statusState.filterChannels = 'inactive';
+    setText('');
+  };
+
+  const item = (
+    <View>
+      <View style={styles.container}>
+        <TextInput
+          style={styles.input}
+          onChangeText={(str) => searchPodcasts(str)}
+          value={text}
+          placeholder={i18next.t('pageOne.placeholder')}
+        />
+        <Button
+          // eslint-disable-next-line react/jsx-curly-brace-presence
+          color={'#BF3030'}
+          title={i18next.t('pageOne.borrar')}
+          onPress={cleanSearch}
+        />
+      </View>
+      <ListPodcasts />
     </View>
   );
 
-  return codeJSX;
+  return item;
 };
 
 export default AppBody;
