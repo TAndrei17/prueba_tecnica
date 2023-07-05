@@ -7,6 +7,7 @@ const StatusContext = createContext({
 const statusState = {
   podcastsLoadTime: 0,
   filterChannels: 'inactive',
+  search: '',
   lng: 'sp',
 };
 
