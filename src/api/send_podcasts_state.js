@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import getPodcasts from './get_podcasts_axios';
 import { actions as podcastsActions } from '../slices/podcasts_all_slice.js';
 
-const UpdateState = ({ children }) => {
+const FillState = ({ children }) => {
   const dispatch = useDispatch();
   // count is updating 1 time in 24 hours
   // useEffects works again when count is changed
@@ -21,11 +21,10 @@ const UpdateState = ({ children }) => {
       }));
     };
     setPodcasts();
-    // // here is a problem - [count] gives rerendings...
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  } /* [count] */);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [count]);
 
   return children;
 };
 
-export default UpdateState;
+export default FillState;

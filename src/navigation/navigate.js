@@ -14,12 +14,12 @@ const MyStack = () => (
       <Stack.Screen
         name="PageOne"
         component={PageOne}
-        options={{ title: i18next.t('pageOne.title') }}
+        options={{ title: i18next.t('pageOne.titlePage') }}
       />
       <Stack.Screen
         name="PageTwo"
         component={PageTwo}
-        options={{ title: i18next.t('pageTwo.title') }}
+        options={{ title: i18next.t('pageTwo.titlePage') }}
       />
     </Stack.Navigator>
   </NavigationContainer>

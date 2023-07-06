@@ -4,7 +4,7 @@ import i18next from '../../../i18next.js';
 
 const styles = StyleSheet.create({
   header: {
-    height: 50,
+    height: 40,
     alignItems: 'center',
     justifyContent: 'flex-end',
     backgroundColor: '#009999',

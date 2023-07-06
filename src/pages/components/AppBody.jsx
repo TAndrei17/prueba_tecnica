@@ -10,16 +10,16 @@ import ListPodcasts from './Podcasts_list.jsx';
 
 const styles = StyleSheet.create({
   container: {
+    margin: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   input: {
     width: '75%',
-    padding: 10,
     borderStyle: 'solid',
     borderBottomWidth: 2,
-    borderBottomColor: '#BF3030',
+    borderBottomColor: '#009999',
   },
 });
 
@@ -53,8 +53,8 @@ const AppBody = () => {
         />
         <Button
           // eslint-disable-next-line react/jsx-curly-brace-presence
-          color={'#BF3030'}
-          title={i18next.t('pageOne.borrar')}
+          color={'#009999'}
+          title={i18next.t('pageOne.borrarButton')}
           onPress={cleanSearch}
         />
       </View>
