@@ -9,7 +9,7 @@ import StatusContext from '../../context/index.js';
 
 const styles = StyleSheet.create({
   body: {
-
+    paddingBottom: 20,
   },
   text: {
 

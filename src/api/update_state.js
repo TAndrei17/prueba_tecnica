@@ -23,7 +23,7 @@ const UpdateState = ({ children }) => {
     setPodcasts();
     // // here is a problem - [count] gives rerendings...
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [count]);
+  } /* [count] */);
 
   return children;
 };

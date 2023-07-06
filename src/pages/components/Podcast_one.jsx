@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    padding: 5,
+    marginBottom: 7,
   },
   text: {
     alignItems: 'center',

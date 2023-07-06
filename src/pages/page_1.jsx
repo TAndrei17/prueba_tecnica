@@ -8,7 +8,6 @@ import AppBody from './components/AppBody';
 const styles = StyleSheet.create({
   content: {
     paddingHorizontal: 10,
-    paddingVertical: 10,
   },
 });
 
