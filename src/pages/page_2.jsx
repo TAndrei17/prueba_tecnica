@@ -4,7 +4,6 @@ import { View, Text /* StyleSheet */ } from 'react-native';
 // import { useTranslation } from 'react-i18next';
 
 import AppHeader from './components/AppHeader.jsx';
-import getOnePodcast from '../api/get_podcast_axios.js';
 
 /* const styles = StyleSheet.create({
   content: {
@@ -16,7 +15,6 @@ import getOnePodcast from '../api/get_podcast_axios.js';
 const PageTwo = () => {
   const activePodcast = useSelector((state) => state.podcastActiveReducer.activePodcast);
   // console.log(typeof activePodcast); // string
-  console.log(getOnePodcast());
 
   const codeJSX = (
     <View>

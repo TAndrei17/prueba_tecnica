@@ -1,5 +1,5 @@
 import axios from 'axios';
-import linkPodcasts from '../url';
+import { linkPodcasts } from '../url';
 
 const getPodcasts = async () => {
   const normalizeData = {
@@ -18,8 +18,7 @@ const getPodcasts = async () => {
       const id = item.id.attributes['im:id'];
       const author = item['im:artist'].label;
       const podcast = item['im:name'].label;
-      const idName = `id${id}`;
-      allPodcasts[idName] = { id, author, podcast };
+      allPodcasts[id] = { id, author, podcast };
     });
   } catch {
     // eslint-disable-next-line no-undef
