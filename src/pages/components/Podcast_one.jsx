@@ -1,5 +1,37 @@
+/* eslint-disable no-use-before-define */
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+
+import { actions as podcastActiveAction } from '../../slices/podcast_active_slice.js';
+
+const Podcast = (props) => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const { id, name, author } = props;
+
+  const chooseChannel = () => {
+    dispatch(podcastActiveAction.setActivePodcast({ id }));
+    navigation.navigate('PageTwo');
+  };
+
+  const onePodcast = (
+    <View style={styles.container}>
+      <TouchableOpacity onPress={chooseChannel}>
+        <Text style={styles.textPodcast}>{ name }</Text>
+        <Text style={styles.textAutor}>{ author }</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
+  return onePodcast;
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -18,17 +50,5 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
-
-const Podcast = (props) => {
-  const { name, author } = props;
-  const item = (
-    <View style={styles.container}>
-      <Text style={styles.textPodcast}>{name}</Text>
-      <Text style={styles.textAutor}>{author}</Text>
-    </View>
-  );
-
-  return item;
-};
 
 export default Podcast;

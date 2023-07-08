@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
 
 const ListPodcasts = () => {
   const { statusState } = useContext(StatusContext);
-  // Get array of objects from state: [ { id, }]
 
+  // Get array of objects from state: [ { id, }]
   const podcasts = useSelector((state) => {
     const getPodcasts = state.podcastsReducer.ids.map(
       (id) => state.podcastsReducer.entities[id],
@@ -36,7 +36,11 @@ const ListPodcasts = () => {
         <FlatList
           data={statusState.filterChannels === 'inactive' ? podcasts : findPodcasts}
           key={(item) => item.id}
-          renderItem={({ item }) => <Podcast name={item.author} author={item.podcast} />}
+          renderItem={
+            ({ item }) => (
+              <Podcast id={item.id} name={item.author} author={item.podcast} />
+            )
+          }
         />
       </FillState>
     </View>
