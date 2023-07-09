@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import { actions as podcastActiveAction } from '../../slices/podcast_active_slice.js';
+import { actions as activePodcastAction } from '../../slices/podcast_active_slice.js';
 
 const Podcast = (props) => {
   const navigation = useNavigation();
@@ -17,7 +17,7 @@ const Podcast = (props) => {
   const { id, name, author } = props;
 
   const chooseChannel = () => {
-    dispatch(podcastActiveAction.setActivePodcast({ id }));
+    dispatch(activePodcastAction.setActivePodcast({ id }));
     navigation.navigate('PageTwo');
   };
 

@@ -4,6 +4,7 @@ import { View, Text /* StyleSheet */ } from 'react-native';
 // import { useTranslation } from 'react-i18next';
 
 import AppHeader from './components/AppHeader.jsx';
+import FillActiveState from '../api/send_selected_state.js';
 
 /* const styles = StyleSheet.create({
   content: {
@@ -13,13 +14,15 @@ import AppHeader from './components/AppHeader.jsx';
 }); */
 
 const PageTwo = () => {
-  const activePodcast = useSelector((state) => state.podcastActiveReducer.activePodcast);
-  // console.log(typeof activePodcast); // string
+  const activePodcast = useSelector((state) => state.activePodcastReducer.activePodcast);
+  console.log(activePodcast); // string
 
   const codeJSX = (
     <View>
       <AppHeader />
-      <Text>{activePodcast}</Text>
+      <FillActiveState>
+        <Text>{activePodcast}</Text>
+      </FillActiveState>
     </View>
   );
 
