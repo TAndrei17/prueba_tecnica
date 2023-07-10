@@ -11,12 +11,13 @@ const selectedPodcastsSlice = createSlice({
   initialState,
   reducers: {
     updatePodcasts(state, { payload }) {
-      const { podcast } = payload;
-      const { id } = podcast;
+      const { podcastDescription } = payload;
+      const { id } = podcastDescription;
+      // console.log(id);
       if (!state.ids.includes(id)) {
         state.ids.push(id);
       }
-      state.entities[id] = podcast;
+      state.entities[id] = podcastDescription;
       // console.log(current(state));
     },
     clearPodcasts(state, { payload }) {

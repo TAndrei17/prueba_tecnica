@@ -15,14 +15,14 @@ const getPodcastData = async (id) => {
     const { data } = await axios.get(getUrl);
 
     const title = data.results[0].collectionName;
-    const autor = data.results[0].artistName;
-    const autorId = data.results[0].artistId;
+    const author = data.results[0].artistName;
+    const authorId = data.results[0].artistId;
     const image = data.results[0].artworkUrl30;
     const xmlLink = data.results[0].feedUrl;
     const tracks = data.results[0].trackCount;
 
     normalizeData.podcastDescription = {
-      id, title, autor, autorId, image, xmlLink, tracks, time,
+      id, title, author, authorId, image, xmlLink, tracks, time,
     };
   } catch {
     // eslint-disable-next-line no-undef

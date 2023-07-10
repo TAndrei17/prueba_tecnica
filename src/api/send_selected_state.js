@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import getPodcastData from './get_selected_axios.js';
 import getPodcastEpisodes from './get_episodes_axios.js';
 import { actions as selectedAction } from '../slices/podcasts_selected_slice.js';
+import { actions as episodesAction } from '../slices/episodes_all_slice.js';
 
 const isActualOne = (object, id) => {
   const activeId = object.ids.filter((item) => item === id);
@@ -36,18 +37,24 @@ const FillActiveState = ({ children }) => {
         const getDataJson = await getPodcastData(activePodcast);
         const { podcastDescription } = getDataJson;
         const { xmlLink } = podcastDescription;
+        console.log(xmlLink);
 
-        const getDataXml = await getPodcastEpisodes(xmlLink);
+        const getDataXml = await getPodcastEpisodes(xmlLink, activePodcast);
         const { description } = getDataXml;
         podcastDescription.description = description;
 
-        // нужно обойти обьект эпизодов и добавить вторичный ключ подкаста
-        // потом dispatch
+        dispatch(selectedAction.updatePodcasts({ podcastDescription }));
 
-        dispatch(selectedAction.updatePodcasts({ podcast: podcastDescription }));
-
-        // const getDataXml = await getXmlData(xmlLink);
-        // console.log(getDataXml);
+        const prepareData = getDataXml.ids
+          .map((id) => getDataXml[id])
+          .reduce((acc, body) => {
+            acc.entities[body.id] = body;
+            acc.ids = [];
+            acc.ids.push(body.id);
+            return acc;
+          }, {});
+        console.log(prepareData);
+        dispatch(episodesAction.addEpisodes({ prepareData }));
       };
       downloadPodcast();
     }

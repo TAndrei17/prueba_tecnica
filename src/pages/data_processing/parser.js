@@ -1,10 +1,21 @@
 import axios from 'axios';
 import _ from 'lodash';
 
+import parseXml from '../../../xmlParser.js';
+
 // eslint-disable-next-line consistent-return
 const getXmlData = async (url) => {
   const { data } = await axios.get(url);
+  const result = await parseXml(url);
+  console.log(result);
   return data;
+};
+
+const prepareText = (text) => {
+  const noNewLines = text.replace(/\n/g, '');
+  const noSpacesTags = noNewLines.replace(/>\s+</g, '><');
+  const noTub = noSpacesTags.replace(/\t/g, '');
+  return noTub;
 };
 
 const getText = (text, begin, end, save = true) => {
@@ -14,13 +25,6 @@ const getText = (text, begin, end, save = true) => {
     return '';
   }
   return text.substring(startIndex, endIndex);
-};
-
-const prepareText = (text) => {
-  const noNewLines = text.replace(/\n/g, '');
-  const noSpacesTags = noNewLines.replace(/>\s+</g, '><');
-  const noTub = noSpacesTags.replace(/\t/g, '');
-  return noTub;
 };
 
 const cleanTags = (text) => text.replace(/<[^>]+>/g, ' ');
@@ -37,23 +41,30 @@ const getDate = (text) => {
   return formatedDate;
 };
 
-const getDescriptionEpisodes = (text) => {
-  const object = {};
+const getDescriptionEpisodes = (text, podcastId) => {
+  const object = {
+    ids: [],
+  };
 
-  const getPodcastDescription = getText(text, '<description>', '</description>', false);
+  const prepareForParsing = prepareText(text);
+  // console.log(prepareForParsing);
+
+  const getPodcastDescription = getText(prepareForParsing, '<description>', '</description>', false);
   const clearDescOne = getText(getPodcastDescription, '<![CDATA[', ']]>', false);
   const clearDescTwo = cleanTags(clearDescOne);
   object.description = clearDescTwo;
 
-  const getItems = getText(text, '<item>', '</channel>');
+  const getItems = getText(prepareForParsing, '<item><title>', '</item></channel></rss>');
   const cleanText = prepareText(getItems);
   const divideText = cleanText.split('</item>');
 
   divideText
     .filter((item) => item.length > 10)
-    .forEach((item, index) => { // here was 'map'
+    .forEach((item) => { // here was 'map'
       const acc = {};
-      acc.id = _.uniqueId('episod_');
+      acc.id = _.uniqueId(`${podcastId}_`);
+      object.ids.push(acc.id);
+      acc.podcast_id = podcastId;
 
       const getTitle = getText(item, '<title>', '</title>');
       const title = getText(getTitle, '<![CDATA[', ']]>', false);
@@ -68,13 +79,14 @@ const getDescriptionEpisodes = (text) => {
       const getTextDuration = cleanTags(getDuration);
       acc.duration = getTextDuration.trim();
 
-      const getAudioUrl = getText(item, '<enclosure url=', 'length=');
+      const getAudioUrl = getText(item, 'url="', '"');
       const url = getAttributeValue(getAudioUrl, 'url');
       acc.audioUrl = url;
 
-      object[index] = acc;
+      const { id } = acc;
+      object[id] = acc;
     });
-
+  // console.log(object);
   return object;
 };
 
