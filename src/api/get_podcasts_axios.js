@@ -20,9 +20,12 @@ const getPodcasts = async () => {
       const podcast = item['im:name'].label;
       allPodcasts[id] = { id, author, podcast };
     });
-  } catch {
+  } catch (error) {
     // eslint-disable-next-line no-undef
     rollbar.critical('Download of podcasts fail');
+    const message = 'Download of podcasts fail';
+    // eslint-disable-next-line no-console
+    console.error(message);
   }
   return normalizeData;
 };

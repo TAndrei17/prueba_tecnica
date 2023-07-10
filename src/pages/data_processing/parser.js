@@ -7,7 +7,9 @@ import parseXml from '../../../xmlParser.js';
 const getXmlData = async (url) => {
   const { data } = await axios.get(url);
   const result = await parseXml(url);
-  console.log(result);
+  const dataMy = JSON.parse(result);
+  console.log(dataMy.rss);
+  console.log(JSON.stringify(dataMy, null, '  '));
   return data;
 };
 
