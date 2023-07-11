@@ -5,7 +5,7 @@ import { View, Text, FlatList /* StyleSheet */ } from 'react-native';
 import _ from 'lodash';
 
 import AppHeader from './components/AppHeader.jsx';
-import FillActiveState from '../api/send_selected_state.js';
+import FillPodcastState from '../api/send_podcast_state.js';
 
 /* const styles = StyleSheet.create({
   content: {
@@ -17,21 +17,22 @@ import FillActiveState from '../api/send_selected_state.js';
 const PageTwo = () => {
   const activePodcast = useSelector((state) => state.activePodcastReducer.activePodcast);
 
-  const getPodcast = useSelector((state) => {
+  /* const getPodcast = useSelector((state) => {
     const getActivePodcast = state.selectedPodcastsReducer.ids
       .filter((id) => id === activePodcast)
       .map((id) => state.selectedPodcastsReducer.entities[id]);
     return getActivePodcast;
-  });
+  }); */
 
-  /* const getEpisodes = useSelector((state) => {
+  const getEpisodes = useSelector((state) => {
     const getActualEpisodes = state.episodesReducer.ids
       .map((id) => state.episodesReducer.entities[id])
       .filter((episod) => episod.podcast_id === activePodcast);
+      console.log(getActualEpisodes[0]);
     return getActualEpisodes;
   });
 
-  <FlatList
+  /* <FlatList
           data={getEpisodes}
           key={(item) => _.uniqueId(`${item.id}_`)}
           renderItem={
@@ -58,20 +59,20 @@ const PageTwo = () => {
     <View>
       <AppHeader />
       <Text>{activePodcast}</Text>
-      <FillActiveState>
+      <FillPodcastState>
         <FlatList
-          data={getPodcast}
-          key={(item) => _.uniqueId(`${item.id}_`)}
+          data={getEpisodes}
+          key={(item) => item.id}
           renderItem={
             ({ item }) => (
               <View>
-                <Text>{item.author}</Text>
-                <Text>{item.xmlLink}</Text>
+                <Text>{item.title}</Text>
+                <Text>{item.pubDate}</Text>
               </View>
             )
         }
         />
-      </FillActiveState>
+      </FillPodcastState>
     </View>
   );
 

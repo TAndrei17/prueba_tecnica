@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import _ from 'lodash';
 import { createSlice /* current */ } from '@reduxjs/toolkit';
-import { actions as selectedAction } from './podcasts_selected_slice.js';
+import { actions as selectedAction } from './podcast_select_slice.js';
 
 const initialState = {
   entities: {},
@@ -14,9 +14,10 @@ const episodesSlice = createSlice({
   reducers: {
     addEpisodes(state, { payload }) {
       const { entities, ids } = payload;
-      const unitData = { entities: { ...state.entities, ...entities } };
-      state.entities = unitData;
-      state.ids = _.uniq([...state.ids, ...ids]);
+      const unitEntities = { ...state.entities, ...entities };
+      state.entities = unitEntities;
+      const unitIds = [...state.ids, ...ids];
+      state.ids = _.uniq(unitIds);
       // eslint-disable-next-line no-console
       // console.log(current(state));
     },

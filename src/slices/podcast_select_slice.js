@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 import { createSlice /* current */ } from '@reduxjs/toolkit';
 
@@ -13,7 +14,6 @@ const selectedPodcastsSlice = createSlice({
     updatePodcasts(state, { payload }) {
       const { podcastDescription } = payload;
       const { id } = podcastDescription;
-      // console.log(id);
       if (!state.ids.includes(id)) {
         state.ids.push(id);
       }
@@ -24,7 +24,6 @@ const selectedPodcastsSlice = createSlice({
       const { entities, ids } = payload;
       state.entities = entities;
       state.ids = ids;
-      // eslint-disable-next-line no-console
       // console.log(current(state));
     },
   },

@@ -12,7 +12,7 @@ const getPodcasts = async () => {
     const { data } = await axios.get(linkPodcasts);
     const { entry } = data.feed;
 
-    // create object for save to app's state
+    // prepare object for state 'podcasts'
     // id12345: { id, author, podcast }
     entry.forEach((item) => {
       const id = item.id.attributes['im:id'];
@@ -21,8 +21,6 @@ const getPodcasts = async () => {
       allPodcasts[id] = { id, author, podcast };
     });
   } catch (error) {
-    // eslint-disable-next-line no-undef
-    rollbar.critical('Download of podcasts fail');
     const message = 'Download of podcasts fail';
     // eslint-disable-next-line no-console
     console.error(message);

@@ -1,23 +1,23 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import getPodcastData from './get_selected_axios.js';
+import getPodcastData from './get_podcast_axios.js';
 import getPodcastEpisodes from './get_episodes_axios.js';
-import { actions as selectedAction } from '../slices/podcasts_selected_slice.js';
-import { actions as episodesAction } from '../slices/episodes_all_slice.js';
+import { actions as selectedAction } from '../slices/podcast_select_slice.js';
+import { actions as episodesAction } from '../slices/episodes_select_slice.js';
 
 const isActualOne = (object, id) => {
   const activeId = object.ids.filter((item) => item === id);
   if (activeId.length > 0) {
     const { entities } = object;
-    const { time } = entities[id]; // don't forget 'time'!
+    const { time } = entities[id];
     const currentTime = new Date().getTime();
     return currentTime - Number(time) < 8.64e+7;
   }
   return false;
 };
 
-const FillActiveState = ({ children }) => {
+const FillPodcastState = ({ children }) => {
   const dispatch = useDispatch();
 
   const activePodcast = useSelector((state) => {
@@ -48,13 +48,23 @@ const FillActiveState = ({ children }) => {
         const prepareData = getDataXml.ids
           .map((id) => getDataXml[id])
           .reduce((acc, body) => {
-            acc.entities[body.id] = body;
-            acc.ids = [];
-            acc.ids.push(body.id);
+            const { id } = body;
+            if (!acc.entities) {
+              acc.entities = {};
+            }
+            acc.entities[id] = body;
+            if (!acc.ids) {
+              acc.ids = [];
+            }
+            const { ids } = getDataXml;
+            acc.ids = ids;
             return acc;
           }, {});
-        console.log(prepareData);
-        dispatch(episodesAction.addEpisodes({ prepareData }));
+
+        dispatch(episodesAction.addEpisodes({
+          entities: prepareData.entities,
+          ids: prepareData.ids,
+        }));
       };
       downloadPodcast();
     }
@@ -63,4 +73,4 @@ const FillActiveState = ({ children }) => {
   return children;
 };
 
-export default FillActiveState;
+export default FillPodcastState;

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import axios from 'axios';
 import { createUrlPodcast } from '../url/index.js';
 
@@ -8,6 +7,10 @@ const getPodcastData = async (id) => {
   };
 
   const time = new Date().getTime();
+
+  // prepare for state 'selectedPodcasts'
+  // receive 'description' from 'get_episodes_axios.js'
+  // { podcast_id: { id, title, description, author, authorId, image, xmlLink, tracks }}
 
   try {
     const getUrl = createUrlPodcast(id);
@@ -24,9 +27,9 @@ const getPodcastData = async (id) => {
     normalizeData.podcastDescription = {
       id, title, author, authorId, image, xmlLink, tracks, time,
     };
-  } catch {
-    // eslint-disable-next-line no-undef
-    rollbar.critical('Download of podcast fail');
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Download of podcast-info is fail', error);
   }
   return normalizeData;
 };

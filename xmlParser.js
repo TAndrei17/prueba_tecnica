@@ -1,62 +1,33 @@
+/* eslint-disable consistent-return */
 import axios from 'axios';
 import { parseString } from 'react-native-xml2js';
 
 const parseXml = async (url) => {
   try {
-    const response = await axios.get(url);
-    const xmlData = response.data;
-    let jsonData = null;
-    parseString(xmlData, (error, result) => {
-      if (error) {
-        // eslint-disable-next-line functional/no-throw-statements
-        throw error;
-      }
-      jsonData = result;
-      console.log(JSON.stringify(jsonData, null, '  '));
-      return jsonData;
-    });
-  } catch (error) {
-    const message = 'Парсинг завершился ошибкой';
-    console.error(message);
-  }
-};
+    const { data } = await axios.get(url);
 
-export default parseXml;
-
-/* import parser from 'fast-xml-parser';
-
-const parseXml = async (url) => {
-  try {
-    const response = await axios.get(url);
-    const xmlString = response.data;
     const options = {
-      attributeNamePrefix: '@_',
-      attrNodeName: 'attr',
-      textNodeName: '#text',
-      ignoreAttributes: false,
-      ignoreNameSpace: false,
-      allowBooleanAttributes: true,
-      parseNodeValue: true,
-      parseAttributeValue: true,
-      trimValues: true,
-      cdataTagname: '__cdata',
-      cdataPositionChar: '\\c',
-      parseTrueNumberOnly: false,
-      arrayNode: false,
-      attrValueProcessor: (val) => parser.parseNumber(val),
-      tagValueProcessor: (val) => parser.parseNumber(val),
+      trim: true,
+      normalizeTags: true,
+      normalize: true,
+      explicitArray: false,
     };
-    const jsonObj = parser.parse(xmlString, options);
-    console.log(jsonObj);
+
+    const jsonData = await new Promise((resolve, reject) => {
+      parseString(data, options, (error, result) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(result);
+        }
+      });
+    });
+    return jsonData;
   } catch (error) {
-    const message = 'Парсинг завершился ошибкой';
+    const message = 'Parsing XML data is fail';
+    // eslint-disable-next-line no-console
     console.error(message);
   }
 };
 
 export default parseXml;
-
-/* const { XMLParser, XMLBuilder, XMLValidator} = require("fast-xml-parser");
-
-const parser = new XMLParser();
-let jObj = parser.parse(XMLdata); */
