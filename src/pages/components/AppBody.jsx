@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import React, { useState, useContext } from 'react';
 import {
   View, TextInput, Button, StyleSheet,
@@ -6,22 +7,8 @@ import {
 import StatusContext from '../../context/index.js';
 import i18next from '../../../i18next.js';
 
+import FillState from '../../api/send_podcasts_state.js';
 import ListPodcasts from './Podcasts_list.jsx';
-
-const styles = StyleSheet.create({
-  container: {
-    margin: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  input: {
-    width: '75%',
-    borderStyle: 'solid',
-    borderBottomWidth: 2,
-    borderBottomColor: '#009999',
-  },
-});
 
 const AppBody = () => {
   const { statusState } = useContext(StatusContext);
@@ -58,11 +45,28 @@ const AppBody = () => {
           onPress={cleanSearch}
         />
       </View>
-      <ListPodcasts />
+      <FillState>
+        <ListPodcasts />
+      </FillState>
     </View>
   );
 
   return item;
 };
+
+const styles = StyleSheet.create({
+  container: {
+    margin: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  input: {
+    width: '75%',
+    borderStyle: 'solid',
+    borderBottomWidth: 2,
+    borderBottomColor: '#009999',
+  },
+});
 
 export default AppBody;

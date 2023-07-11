@@ -37,7 +37,6 @@ const FillPodcastState = ({ children }) => {
         const getDataJson = await getPodcastData(activePodcast);
         const { podcastDescription } = getDataJson;
         const { xmlLink } = podcastDescription;
-        console.log(xmlLink);
 
         const getDataXml = await getPodcastEpisodes(xmlLink, activePodcast);
         const { description } = getDataXml;
