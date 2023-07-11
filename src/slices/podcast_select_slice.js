@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
-import { createSlice /* current */ } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 
 const initialState = {
   entities: {},
@@ -18,7 +18,7 @@ const selectedPodcastsSlice = createSlice({
         state.ids.push(id);
       }
       state.entities[id] = podcastDescription;
-      // console.log(current(state));
+      console.log(current(state));
     },
     clearPodcasts(state, { payload }) {
       const { entities, ids } = payload;

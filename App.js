@@ -1,4 +1,4 @@
-import 'react-native-gesture-handler';
+// import 'react-native-gesture-handler';
 
 /* eslint-disable react/function-component-definition */
 import { Client } from 'rollbar-react-native';

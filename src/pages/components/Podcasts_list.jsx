@@ -18,13 +18,15 @@ const ListPodcasts = () => {
     return getPodcasts;
   });
 
+  const isFilterActive = statusState.filterChannels === 'inactive' ? podcasts : findPodcasts;
+
   const { search } = statusState;
   const findPodcasts = choosePodcasts(podcasts, search);
 
   const codeJSX = (
     <View style={styles.body}>
       <FlatList
-        data={statusState.filterChannels === 'inactive' ? podcasts : findPodcasts}
+        data={isFilterActive}
         key={(item) => item.id}
         renderItem={
           ({ item }) => (

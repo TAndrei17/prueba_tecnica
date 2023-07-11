@@ -9,6 +9,9 @@ const sp = {
     pageTwo: {
       titlePage: 'Autor/podcastes',
     },
+    pageDrawer: {
+      titlePage: 'About',
+    },
   },
 };
 

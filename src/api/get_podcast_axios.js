@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createUrlPodcast } from '../url/index.js';
 
-const getPodcastData = async (id) => {
+const getPodcastData = async (idPodcast) => {
   const normalizeData = {
     podcastDescription: {},
   };
@@ -13,14 +13,15 @@ const getPodcastData = async (id) => {
   // { podcast_id: { id, title, description, author, authorId, image, xmlLink, tracks }}
 
   try {
-    const getUrl = createUrlPodcast(id);
+    const getUrl = createUrlPodcast(idPodcast);
 
     const { data } = await axios.get(getUrl);
 
+    const id = idPodcast;
     const title = data.results[0].collectionName;
     const author = data.results[0].artistName;
     const authorId = data.results[0].artistId;
-    const image = data.results[0].artworkUrl30;
+    const image = data.results[0].artworkUrl100; // it's possible 30/60/100/600
     const xmlLink = data.results[0].feedUrl;
     const tracks = data.results[0].trackCount;
 
