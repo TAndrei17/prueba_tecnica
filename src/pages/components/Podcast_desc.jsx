@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 import { useSelector } from 'react-redux';
 import {
-  View, Image, Text, FlatList,
+  View, Image, Text, FlatList, StyleSheet,
 } from 'react-native';
 
 const PodcastDescribe = () => {
