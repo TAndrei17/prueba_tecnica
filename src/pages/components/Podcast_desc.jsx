@@ -51,21 +51,20 @@ const styles = StyleSheet.create({
   image: {
     width: 100,
     height: 100,
-    aspectRatio: 1,
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 5,
     color: '#A66F00',
   },
   author: {
     fontSize: 15,
-    marginBottom: 5,
+    marginBottom: 10,
     color: '#A66F00',
   },
   description: {
     fontSize: 15,
+    fontStyle: 'italic',
     color: '#A66F00',
   },
 });
