@@ -10,15 +10,16 @@ const es = {
       titlePage: 'Autor/podcastes',
       episodes: '{{count}} episodio',
       episodes_plural: '{{count}} episodios',
+      descargar: 'Descargo episodios',
     },
     pageDrawer: {
       titlePage: 'About',
     },
-    audioButton: {
-      descarga_no: 'Descarga fallida',
-      descarga_si: 'Reproduccion completa',
-      descarga: 'Se reproduce...',
-      reproducir: 'Reproducir audio',
+    audioBlock: {
+      descarga_si: 'Descargamos el episodio',
+      descarga_no: 'Lo sentimos.\nDescarga fallida',
+      play: 'Play',
+      stop: 'Stop',
       final: 'Reproducción se completó con éxito',
     },
   },
