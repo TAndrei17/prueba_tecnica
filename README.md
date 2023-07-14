@@ -28,22 +28,19 @@ La aplicación deberá tener una maquina de estados (Redux) que tendrá que admi
 
 Recursos:
 
-La URL para obtener el listado de los 100 podcasts más populares es la
-siguiente:
-
+La URL para obtener el listado de los 100 podcasts más populares es la siguiente:
 https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json
 
-La URL para obtener el detalle de un podcast es la siguiente: 
+La URL para obtener el detalle de un podcast es la siguiente:
 https://itunes.apple.com/lookup?id={podcastId}
----
 
 ## Resultado
 
 ### La pagina una
-![Podcasts_list](/images/Podcasts_list.JPG)
+![Podcasts_list](/images/podcasts_list.jpg)
 
 ### La pagina una. La búsqeda
-![Podcasts_list](/images/Podcasts_search.JPG)
+![Podcasts_list](/images/podcasts_search.jpg)
 
 ### La pagina dos
-![Podcasts_list](/images/Podcast_episodes.JPG)
+![Podcasts_list](/images/podcast_episodes.jpg)
