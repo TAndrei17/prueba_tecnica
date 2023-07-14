@@ -1,4 +1,4 @@
-const sp = {
+const es = {
   translation: {
     pageOne: {
       titlePage: 'Buscar',
@@ -8,7 +8,8 @@ const sp = {
     },
     pageTwo: {
       titlePage: 'Autor/podcastes',
-      episodio: 'Episodios ',
+      episodes: '{{count}} episodio',
+      episodes_plural: '{{count}} episodios',
     },
     pageDrawer: {
       titlePage: 'About',
@@ -23,4 +24,4 @@ const sp = {
   },
 };
 
-export default sp;
+export default es;

@@ -1,13 +1,14 @@
 /* eslint-disable no-use-before-define */
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import {
   View, Text, FlatList, StyleSheet,
 } from 'react-native';
 
 // import ButtonAudio from './Button_sound.jsx';
-import i18next from '../../../i18next.js';
 
 const EpisodesList = () => {
+  const { t } = useTranslation('translation', { keyPrefix: 'pageTwo' });
   const getIdPodcast = useSelector((state) => state.activePodcastReducer.activePodcast);
 
   // Get episodes of active podcast from state:
@@ -19,11 +20,12 @@ const EpisodesList = () => {
     return getActualEpisodes;
   });
 
+  const quantatyEpisodes = `${t('episodes', { count: getEpisodes.length - 1 })}`;
+
   const codeJSX = (
     <View>
       <Text style={styles.container}>
-        {i18next.t('pageTwo.episodio')}
-        {getEpisodes.length - 1}
+        {quantatyEpisodes}
       </Text>
       <FlatList
         data={getEpisodes}

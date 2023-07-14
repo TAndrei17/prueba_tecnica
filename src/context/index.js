@@ -7,7 +7,7 @@ const StatusContext = createContext({
 const statusState = {
   filterChannels: 'inactive',
   search: '',
-  lng: 'sp',
+  lng: 'es',
 };
 
 export default StatusContext;

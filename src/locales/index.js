@@ -1,5 +1,5 @@
-import sp from './sp.js';
+import es from './sp.js';
 
-const resources = { sp };
+const resources = { es };
 
 export default resources;
