@@ -18,10 +18,9 @@ const ListPodcasts = () => {
     return getPodcasts;
   });
 
-  const isFilterActive = statusState.filterChannels === 'inactive' ? podcasts : findPodcasts;
-
   const { search } = statusState;
   const findPodcasts = choosePodcasts(podcasts, search);
+  const isFilterActive = statusState.filterChannels === 'inactive' ? podcasts : findPodcasts;
 
   const codeJSX = (
     <View style={styles.body}>
