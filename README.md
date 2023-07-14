@@ -35,3 +35,15 @@ https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json
 
 La URL para obtener el detalle de un podcast es la siguiente: 
 https://itunes.apple.com/lookup?id={podcastId}
+---
+
+## Resultado
+
+### La pagina una
+![Podcasts_list](/images/Podcasts_list.JPG)
+
+### La pagina una. La búsqeda
+![Podcasts_list](/images/Podcasts_search.JPG)
+
+### La pagina dos
+![Podcasts_list](/images/Podcast_episodes.JPG)
