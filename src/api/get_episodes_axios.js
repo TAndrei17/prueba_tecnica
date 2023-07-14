@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import _ from 'lodash';
 import parseXml from '../../xmlParser.js';
+import cleanTags from '../pages/data_processing/clean_tags.js';
 
 const createDate = (dateString) => {
   const myDate = new Date(dateString);
@@ -13,8 +14,6 @@ const createDate = (dateString) => {
   return myDate.toLocaleString('en-En', options);
 };
 
-const cleanTags = (text) => text.replace(/<[^>]+>/g, ' ');
-
 // prepare for state ('episodes');
 // { episod_id: { id, title, description, release, duration, audioUrl, podcast_id }};
 
@@ -23,7 +22,7 @@ const getDescriptionEpisodes = (jsonText, podcastId) => {
     ids: [],
   };
 
-  object.description = jsonText.rss.channel.description;
+  object.description = cleanTags(jsonText.rss.channel.description);
   jsonText.rss.channel.item
     .forEach((episod) => {
       const acc = {};
@@ -35,7 +34,7 @@ const getDescriptionEpisodes = (jsonText, podcastId) => {
       acc.title = episod.title;
       acc.description = cleanTags(episod.description).trim();
       acc.duration = episod['itunes:duration'];
-      acc.audioUrl = episod.enclosure.$.url; // здесь может быть проблема
+      acc.audioUrl = episod.enclosure.$.url;
 
       const { id } = acc;
       object[id] = acc;
