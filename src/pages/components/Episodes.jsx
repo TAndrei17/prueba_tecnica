@@ -5,7 +5,7 @@ import {
   View, Text, FlatList, StyleSheet,
 } from 'react-native';
 
-// import ButtonAudio from './Button_sound.jsx';
+import AudioBlock from './Button_sound.jsx';
 
 const EpisodesList = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'pageTwo' });
@@ -25,7 +25,7 @@ const EpisodesList = () => {
   const codeJSX = (
     <View>
       <Text style={styles.container}>
-        {quantatyEpisodes}
+        {getEpisodes.length > 1 ? quantatyEpisodes : null}
       </Text>
       <FlatList
         data={getEpisodes}
@@ -36,6 +36,7 @@ const EpisodesList = () => {
               <Text style={styles.title}>{item.title}</Text>
               <Text style={styles.duration}>{item.duration}</Text>
               <Text style={styles.description}>{item.description}</Text>
+              <AudioBlock audioUrl={item.audioUrl} />
             </View>
           )
         }
