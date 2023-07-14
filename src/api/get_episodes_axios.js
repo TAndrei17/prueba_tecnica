@@ -13,6 +13,8 @@ const createDate = (dateString) => {
   return myDate.toLocaleString('en-En', options);
 };
 
+const cleanTags = (text) => text.replace(/<[^>]+>/g, ' ');
+
 // prepare for state ('episodes');
 // { episod_id: { id, title, description, release, duration, audioUrl, podcast_id }};
 
@@ -31,7 +33,7 @@ const getDescriptionEpisodes = (jsonText, podcastId) => {
 
       acc.pubDate = createDate(episod.pubdate);
       acc.title = episod.title;
-      acc.description = episod.description;
+      acc.description = cleanTags(episod.description).trim();
       acc.duration = episod['itunes:duration'];
       acc.audioUrl = episod.enclosure.$.url; // здесь может быть проблема
 
