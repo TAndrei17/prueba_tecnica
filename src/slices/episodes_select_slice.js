@@ -23,17 +23,18 @@ const episodesSlice = createSlice({
     },
     extraReducers: (builder) => {
       builder.addCase(selectedAction.clearPodcasts, (state, action) => {
-        const { idsOld } = action.payload;
+        // here are ids of actual podcasts
+        const { ids } = action.payload;
         const getActuaEpisodes = state.ids
           .map((id) => state.entities[id])
-          .filter((episod) => !idsOld.include(episod.podcast_id))
+          .filter((episod) => ids.include(episod.podcast_id))
           .reduce((acc, episod) => {
             const { id } = episod;
             acc[id] = episod;
             return acc;
           }, {});
         state.entities = getActuaEpisodes;
-        state.ids = state.ids.filter((id) => !idsOld.include(id));
+        state.ids = Object.keys(getActuaEpisodes);
       });
     },
   },
