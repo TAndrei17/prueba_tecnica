@@ -37,10 +37,10 @@ https://itunes.apple.com/lookup?id={podcastId}
 ## Resultado
 
 ### La pagina una
-![Podcasts_list](/images/podcasts_list.jpg)
+<img src="/images/podcasts_list.jpg" alt="La pagina una" width="33%" />
 
 ### La pagina una. La búsqeda
-![Podcasts_list](/images/podcasts_search.jpg)
+<img src="/images/podcasts_search.jpg" alt="La pagina una" width="33%" />
 
 ### La pagina dos
-![Podcasts_list](/images/podcast_episodes.jpg)
+<img src="/images/podcast_episodes.jpg" alt="La pagina una" width="33%" />
